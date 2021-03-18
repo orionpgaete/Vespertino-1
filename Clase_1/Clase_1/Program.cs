@@ -1,10 +1,15 @@
 ﻿using System;
 
+
 namespace Clase_1
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args) => 
-          Console.WriteLine("Hola Mundo!");
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hola Mundo!");
+            Console.ReadKey();
+        }
     }
 }
+
