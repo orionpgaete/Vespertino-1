@@ -16,8 +16,18 @@ namespace Clase_1
             //Console.WriteLine("Su nombre es: " + nombre);
             Console.WriteLine("Ingrese la edad: ");
             string edadTx = Console.ReadLine();
+            int edad = -1;
+            bool esValido = Int32.TryParse(edadTx, out edad);
 
-            Console.WriteLine("Su nomnbre es: {0} y la que tiene es: {1}", nombre, edadTx);
+            if(!esValido)
+                {
+                    Console.WriteLine("Ingrese bien la edad");
+                }
+            else
+                {
+                    Console.WriteLine("Su nomnbre es: {0} y la que tiene es: {1}", nombre, edadTx);
+                }
+            
             Console.ReadKey();
         }
     }
