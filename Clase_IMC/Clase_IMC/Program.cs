@@ -34,6 +34,10 @@ namespace Clase_IMC
                 esValido = Double.TryParse(Console.ReadLine().Trim(), out peso);
             } while (!esValido);
 
+
+
+
+
             do
             {
                 Console.WriteLine("Ingrese estatura");
