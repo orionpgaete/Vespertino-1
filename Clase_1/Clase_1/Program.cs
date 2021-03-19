@@ -7,6 +7,9 @@ namespace Clase_1
     {
         static void Main(string[] args)
         {
+            Console.BackgroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Clear(); //100% el color de fondo
             Console.WriteLine("Hola Mundo!");
             Console.WriteLine("Ingrese nombre:");
             string nombre = Console.ReadLine();
