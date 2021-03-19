@@ -19,7 +19,7 @@ namespace Clase_1
             int edad = -1;
             bool esValido = Int32.TryParse(edadTx, out edad);
 
-            if(!esValido)
+            if(esValido == false)
                 {
                     Console.WriteLine("Ingrese bien la edad");
                 }
