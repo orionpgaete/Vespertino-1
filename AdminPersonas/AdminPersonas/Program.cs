@@ -24,7 +24,7 @@ namespace AdminPersonas
         {
             Console.WriteLine("Ingrese nombre");
             List<Persona> filtradas = new PersonasDAL().FiltrarPersonas(Console.ReadLine().Trim());
-            filtradas.ForEach(p => Console.WriteLine("Nombre: {0} Peso{1}", p.Nombre, p.Peso));
+            filtradas.ForEach(p => Console.WriteLine("Nombre: {0} Peso:{1}", p.Nombre, p.Peso));
         }
 
 

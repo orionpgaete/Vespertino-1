@@ -15,5 +15,19 @@ namespace AdminPersonas
         public uint Telefono { get => telefono; set => telefono = value; }
         public double Estatura { get => estatura; set => estatura = value; }
         public double Peso { get => peso; set => peso = value; }
+
+        public double IMC
+        {
+            get
+            {
+                return Peso / (Estatura * Estatura);
+            }
+        }
+
+        public override string ToString()
+        {
+            return Nombre + " " + IMC;
+        }
     }
+
 }
