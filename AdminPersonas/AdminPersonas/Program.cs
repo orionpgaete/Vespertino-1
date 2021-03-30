@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AdminPersonasModel.DAL;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AdminPersonas
 {
@@ -8,7 +11,13 @@ namespace AdminPersonas
 
         static void MostrarPersona()
         {
+            List<Persona> personas = new PersonasDAL().ObtenerPersonas();
+            for (int i=0; i < personas.Count(); i++)
+            {
+                Persona actual = personas[i];
+                Console.WriteLine("{0}: Nombre:{1} Peso:{2}", i, actual.Nombre, actual.Peso);
 
+            }
         }
 
         static void BuscarPersona()
@@ -64,12 +73,21 @@ namespace AdminPersonas
                     Peso = peso
                 };
 
+            new List<Persona>() { new Persona() { }, new Persona() };
+
+
             //FORMA 1
-                //p.Nombre = nombre;
-                //p.Estatura = estatura;
-                //p.Peso = peso;
-                //p.Telefono = telefono;
-           
+            //p.Nombre = nombre;
+            //p.Estatura = estatura;
+            //p.Peso = peso;
+            //p.Telefono = telefono;
+
+            //FORMA 1
+            new PersonasDAL().AgregarPersona(p);
+
+            //FORMA 2
+            //PersonasDAL pDAL = new PersonasDAL();
+            //pDAL.AgregarPersona(p);
 
 
             Console.WriteLine("Nombre: {0}", p.Nombre);
