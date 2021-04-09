@@ -48,10 +48,10 @@ namespace AdminPersonasModel.DAL
                 string texto;
                 do
                 {
-                    texto = reader.ReadLine().Trim(); //error NULL
+                    texto = reader.ReadLine(); //error NULL
                     if (texto != null)
                     {
-                        string[] textoArr = texto.Split(';');
+                        string[] textoArr = texto.Trim().Split(';');
                         string nombre = textoArr[0];
                         double estatura = Convert.ToDouble(textoArr[1]);
                         uint telefono = Convert.ToUInt32(textoArr[2]);
