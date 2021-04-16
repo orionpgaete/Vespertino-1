@@ -19,6 +19,7 @@ namespace HolaMundoSocket.Comunicacion
             this.cliente = socket;
             Stream stream = new NetworkStream(this.cliente);
             this.reader = new StreamReader(stream);
+            this.writer = new StreamWriter(stream);
 
         }
 
