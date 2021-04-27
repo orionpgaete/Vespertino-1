@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace HolaSocket.Comunicacion
+namespace ServidorSocketUtils
 {
     public class ClienteCom
     {
@@ -17,6 +19,8 @@ namespace HolaSocket.Comunicacion
             this.cliente = socket;
             Stream stream = new NetworkStream(this.cliente);
             this.reader = new StreamReader(stream);
+            this.writer = new StreamWriter(stream);
+
         }
 
         public bool Escribir(string mensaje)
@@ -37,11 +41,15 @@ namespace HolaSocket.Comunicacion
             try
             {
                 return this.reader.ReadLine().Trim();
+
             }catch(Exception ex)
             {
                 return null;
             }
         }
+
+
+
         public void Desconectar()
         {
             try
@@ -52,7 +60,5 @@ namespace HolaSocket.Comunicacion
 
             }
         }
-
-
     }
 }
