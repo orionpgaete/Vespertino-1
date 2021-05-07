@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\IMensajeDAL.cs" />
+    <Compile Include="DAL\MensajeDALArchivos.cs" />
     <Compile Include="DTO\Mensaje.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

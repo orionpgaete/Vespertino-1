@@ -8,8 +8,24 @@ namespace Mensajero
 {
     class Program
     {
+        static bool Menu()
+        {
+
+        }
         static void Main(string[] args)
         {
         }
+
+        static void Ingresar()
+        {
+
+        }
+
+        static void Mostrar()
+        {
+
+        }
+    }
+
     }
 }
