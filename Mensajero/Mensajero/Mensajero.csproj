@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -50,6 +51,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\EjercicioSocket\ServidorSocketUtils\ServidorSocketUtils.csproj">
+      <Project>{652a1e09-5eb4-43c4-89ab-9fea2da531b5}</Project>
+      <Name>ServidorSocketUtils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MensajeroModel\MensajeroModel.csproj">
       <Project>{cb080730-e49d-4f39-9478-3d3f0aad8378}</Project>
       <Name>MensajeroModel</Name>
