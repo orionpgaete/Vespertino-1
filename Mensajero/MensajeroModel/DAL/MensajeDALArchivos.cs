@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace MensajeroModel.DAL
 {
     public class MensajeDALArchivos : IMensajeDAL
@@ -18,6 +19,7 @@ namespace MensajeroModel.DAL
         }
         //2. Debe posser un atributo del mismo tipo de la clase y estatico
         private static MensajeDALArchivos instancia;
+
         //3. Tener un metodo GetIntance, que devulver un referencia al atributo
         public static IMensajeDAL GetInstacia()
         {
@@ -44,7 +46,6 @@ namespace MensajeroModel.DAL
 
             }
         }
-
         public List<Mensaje> ObtenerMensajes()
         {
             List<Mensaje> lista = new List<Mensaje>();
