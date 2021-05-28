@@ -1,4 +1,5 @@
-﻿using MensajeroModel;
+﻿using Mensajero.Comunicacion;
+using MensajeroModel;
 using MensajeroModel.DAL;
 using ServidorSocketUtils;
 using System;
@@ -7,6 +8,7 @@ using System.Configuration;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Mensajero
@@ -18,59 +20,31 @@ namespace Mensajero
         {
             bool continuar = true;
             string resp = "0";
-            Console.WriteLine("¿Que quiere hacer?");
-            Console.WriteLine(" 1. Ingresar \n 2. Mostrar \n 0. Salir");
-          
-            resp = Console.ReadLine().Trim();
-
-            switch (resp)
-            {
-                case "1": Ingresar();
-                    break;
-                case "2": Mostrar();
-                    break;
-                case "0": continuar = false;
-                    break;
-                default: Console.WriteLine("Ingrese de nuevo");
-                    break;
-            }
+         
+                Console.WriteLine("¿Que quiere hacer?");
+                Console.WriteLine(" 1. Ingresar \n 2. Mostrar \n 0. Salir");
+                resp = Console.ReadLine().Trim();
+                switch (resp)
+                {
+                    case "1":
+                        Ingresar();
+                        break;
+                    case "2":
+                        Mostrar();
+                        break;
+                    case "0":
+                        continuar = false;
+                        break;
+                    default:
+                        Console.WriteLine("Ingrese de nuevo");
+                        break;
+                }    
             return continuar;
         }
 
         static void IniciarServidor()
         {
-            int puerto = Convert.ToInt32(ConfigurationManager.AppSettings["puerto"]);
-            ServerSocket servidor = new ServerSocket(puerto);
-            Console.WriteLine("Iniciando servidor en puerto {0}", puerto);
-            if (servidor.Iniciar())
-            {
-                while (true)
-                {
-                    Console.WriteLine("Esperando a Cliente...");
-                    Socket cliente = servidor.ObtenerCliente();
-                    Console.WriteLine("Cliente recibido");
-
-                    ClienteCom clienteCom = new ClienteCom(cliente);
-                    clienteCom.Escribir("Ingrese nombre: ");
-                    string nombre = clienteCom.Leer();
-                    clienteCom.Escribir("Ingrese texto: ");
-                    string texto = clienteCom.Leer();
-
-                    Mensaje mensaje = new Mensaje()
-                    {
-                        Nombre = nombre,
-                        Texto = texto,
-                        Tipo = "TCP"
-                    };
-                    mensajeDAL.AgregarMensaje(mensaje);
-                    clienteCom.Desconectar();
-
-                }
-            }
-            else
-            {
-                Console.WriteLine("Error, no se puede iniciar Servidor en puerto {0}", puerto);
-            }
+          
 
         }
         static void Main(string[] args)
@@ -79,7 +53,13 @@ namespace Mensajero
             //2. el puerto tiene que ser configurable App.Config
             //3. cuando reciba un cliente, tiene que solicitar a ese cliente
             // el nombre y el texto, para agregar un nuevo mensaje con el tipo TCP
-           //IniciarServidor();
+            HebraServidor hebra = new HebraServidor();
+            Thread t = new Thread(new ThreadStart(hebra.Ejecutar));
+            t.IsBackground = true;
+            t.Start();
+
+            // 1. ¿Como atender mas de un cliente a las vez?
+            // 2. ¿Como evitar el bloqueo?
             while (Menu());
         }
 
@@ -95,12 +75,22 @@ namespace Mensajero
                 Texto = texto,
                 Tipo = "aplicacion"
             };
-            mensajeDAL.AgregarMensaje(mensaje);
+            lock (mensajeDAL)
+                {
+                mensajeDAL.AgregarMensaje(mensaje);
+            }
+           
         }
 
         static void Mostrar()
         {
-            List<Mensaje> mensajes = mensajeDAL.ObtenerMensajes();
+
+            List<Mensaje> mensajes = null;
+              lock (mensajeDAL)
+                {
+                    mensajes = mensajeDAL.ObtenerMensajes();
+            }  
+                
             foreach (Mensaje mensaje in mensajes)
             {
                 Console.WriteLine(mensaje);
