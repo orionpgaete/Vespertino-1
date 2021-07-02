@@ -7,7 +7,26 @@
                     <h3>Ver Cliente</h3>
                 </div>
                 <div class="card-body">
-                    <h3>Esta pagina es para Ver Clientes</h3>
+                  
+                    <asp:GridView CssClass="table table-hover table-bordered"
+                        OnRowCommand="grillaClientes_RowCommand"
+                        AutoGenerateColumns="false" EmptyDataText="No hay clientes" ShowHeader="true"
+                        runat="server" ID="grillaClientes">
+                        <Columns>
+                            <asp:BoundField DataField="Rut" HeaderText="Rut del Cliente" />
+                            <asp:BoundField DataField="Nombre" HeaderText="Nombre del Cliente" />
+                            <asp:BoundField DataField="NivelTxt" HeaderText="Nivel Rewards" />
+                            <asp:BoundField DataField="BebidaFavorita.Nombre" HeaderText="Favorita" />
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:Button CommandName="eliminar" runat="server"
+                                        CommandArgument='<%# Eval("Rut") %>'
+                                        CssClass="btn btn-danger" Text="Eliminar" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+
+                    </asp:GridView>
                 </div>
             </div>
         </div>
